@@ -39,19 +39,9 @@ defmodule Cards do
   ## Examples
 
       iex> deck = Cards.create_deck
-      iex> Cards.shuffle(deck)
-      ["Nine of Hearts", "Queen of Clubs", "Seven of Spades", "Three of Spades",
-      "Seven of Clubs", "Eight of Clubs", "Jack of Diamonds", "Two of Hearts",
-      "King of Hearts", "Jack of Spades", "Ace of Hearts", "Six of Hearts",
-      "Queen of Diamonds", "Four of Spades", "Ace of Spades", "Queen of Spades",
-      "Nine of Diamonds", "Six of Clubs", "Six of Diamonds", "Nine of Clubs",
-      "Jack of Hearts", "King of Clubs", "Two of Spades", "Seven of Hearts",
-      "Three of Clubs", "Five of Clubs", "Eight of Diamonds", "Nine of Spades",
-      "King of Diamonds", "Two of Clubs", "Four of Clubs", "Six of Spades",
-      "Two of Diamonds", "King of Spades", "Ace of Diamonds", "Ace of Clubs",
-      "Four of Hearts", "Queen of Hearts", "Five of Spades", "Eight of Hearts",
-      "Jack of Clubs", "Seven of Diamonds", "Three of Diamonds", "Four of Diamonds",
-      "Five of Hearts", "Eight of Spades", "Five of Diamonds", "Three of Hearts"]
+      iex> shuffled_deck = Cards.shuffle(deck)
+      iex> deck != shuffled_deck
+      true
 
   """
   def shuffle(deck) do
@@ -64,9 +54,9 @@ defmodule Cards do
   ## Examples
 
       iex> deck = Cards.create_deck
-      iex> Cards.contains(deck, "Ace of Hearts")
+      iex> Cards.contains?(deck, "Ace of Hearts")
       true
-      iex> Cards.contains(deck, "Eleven of Hearts")
+      iex> Cards.contains?(deck, "Eleven of Hearts")
       false
 
   """
@@ -84,7 +74,7 @@ defmodule Cards do
   ## Examples
 
       iex> deck = Cards.create_deck
-      iex> {hand, deck} = Cards.deal(deck, 2)
+      iex> {hand, _deck} = Cards.deal(deck, 2)
       iex> hand
       ["Ace of Diamonds", "Ace of Hearts"]
 
@@ -115,11 +105,11 @@ defmodule Cards do
 
   ## Examples
 
-      iex> deck = Cards.create_deck
-      iex> Cards.create_hand(deck, 3)
-      iex> Cards.save("deck.txt")
-      iex> Cards.load("deck.txt")
-      ["Three of Hearts", "Seven of Spades", "King of Diamonds"]
+      iex> {hand, _deck} = Cards.hand(3)
+      iex> Cards.save(hand, "deck.txt")
+      iex> deck = Cards.load("deck.txt")
+      iex> length(deck)
+      3
 
       iex> Cards.load("fake_deck.txt")
       "File 'fake_deck.txt' does not exist"
@@ -138,7 +128,8 @@ defmodule Cards do
   ## Examples
 
       iex> {hand, _deck} = Cards.hand(2)
-      ["Three of Clubs", "Eight of Clubs"]
+      iex> length(hand)
+      2
 
   """
   def hand(hand_size) do
