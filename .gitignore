@@ -24,3 +24,6 @@ cards-*.tar
 
 # Ignore the elixir LS folder
 .elixir_ls
+
+# Ignore DS_STORE
+.DS_Store
