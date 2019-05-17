@@ -3,11 +3,15 @@ defmodule Cards.MixProject do
 
   def project do
     [
-      app: :cards,
+      app: :playing_cards,
+      name: "Cards",
       version: "0.1.0",
       elixir: "~> 1.8",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      package: package(),
+      description: description(),
+      source_url: "https://github.com/baileygranam/elixir-cards"
     ]
   end
 
@@ -15,6 +19,20 @@ defmodule Cards.MixProject do
   def application do
     [
       extra_applications: [:logger]
+    ]
+  end
+
+  defp description() do
+    "A module that provides functions for creating and dealing playing cards."
+  end
+
+  defp package() do
+    [
+      name: "playing_cards",
+      # These are the default files included in the package
+      files: ~w(lib config test doc .formatter.exs mix.exs README.md),
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/baileygranam/elixir-cards"}
     ]
   end
 
